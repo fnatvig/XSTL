@@ -18,15 +18,8 @@ The main contributions include:
 
 It is recommended to use a virtual environment. You can do this manually or simply run the provided batch script:
 
-Option 1: Run the batch script on Windows. 
-
 Double-click the file `setup_venv.bat` to automatically:
 - Create a virtual environment in a folder called `venv`
 - Activate it
 - Install all required packages from `requirements.txt`
 
-Option 2: Manual setup (cross-platform)
-
-python3 -m venv venv
-source venv/bin/activate  (On Windows, use: venv\Scripts\activate)
-pip install -r requirements.txt
