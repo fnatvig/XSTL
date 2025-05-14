@@ -16,10 +16,21 @@ The main contributions include:
 
 ## Getting started
 
-It is recommended to use a virtual environment. You can do this manually or simply run the provided batch script:
+It is recommended to use a virtual environment before running any experiments.
 
-Double-click the file `setup_venv.bat` to automatically:
+### Windows (recommended)
+
+Double-click the file `setup_venv.bat` to:
 - Create a virtual environment in a folder called `venv`
 - Activate it
 - Install all required packages from `requirements.txt`
+
+### macOS/Linux (manual setup)
+
+If you're not on Windows, run the following from the command line:
+
+```bash
+python3 -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
 
