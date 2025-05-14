@@ -10,16 +10,26 @@ This project investigates whether knowledge gained from one IEC 61850-based subs
 
 The main contributions include:
 - Pretraining and fine-tuning an IDS on IEC 61850 traffic from different substations
-- Evaluation based on two threshold selection strategies: high-sensitivity (ensuring recall = 1) and AUC-based (assessing overall trade-off)
+- Results are evaluated under two operating points: FPR@TPR=1.0 and AUC-ROC.
 - Statistical comparison using the Wilcoxon signed-rank test to account for training variability
-- An ablation study assessing the impact of freezing pretrained layers
 
 ## Getting started
 
-It is recommended to use a virtual environment. You can do this manually or simply run the provided batch script:
+It is recommended to use a virtual environment before running any experiments.
 
-Double-click the file `setup_venv.bat` to automatically:
+### Windows (recommended)
+
+Double-click the file `setup_venv.bat` to:
 - Create a virtual environment in a folder called `venv`
 - Activate it
 - Install all required packages from `requirements.txt`
+
+### macOS/Linux (manual setup)
+
+If you're not on Windows, run the following from the command line:
+
+```bash
+python3 -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
 
