@@ -1,12 +1,26 @@
+import tensorflow as tf
+import numpy as np
+import random
+import os
 import pandas as pd
 import argparse
-import warnings
+
 
 from scipy.stats import wilcoxon
 from sklearn.metrics import roc_auc_score
 
 from preprocessing import *
 from autoencoder import *
+
+# Set seeds
+seed = 42
+random.seed(seed)
+np.random.seed(seed)
+tf.random.set_seed(seed)
+
+# Optional: Force deterministic ops (TensorFlow 2.9+)
+os.environ['TF_DETERMINISTIC_OPS'] = '1'
+
 def parse_test(test):
     X_pretrain = None
     X_train = None
