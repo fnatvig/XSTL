@@ -21,7 +21,7 @@ XSTL/
 ├── results/         # Saved output metrics from experiments
 ├── requirements.txt # List of dependencies for the project
 ├── setup_venv.bat   # Script for creating a virtual environment (Windows)
-├── README.md        # Project overview and usage instructions
+└── README.md        # Project overview and usage instructions
 ```
 
 ## Getting started
