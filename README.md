@@ -32,4 +32,19 @@ If you're not on Windows, run the following from the command line:
 python3 -m venv venv
 source venv/bin/activate
 pip install -r requirements.txt
+```
+## Folder structure
+
+```
+XSTL/
+├── data/            # Preprocessed datasets 
+├── src/             # Core implementation of the XSTL framework
+├── results/         # Saved output metrics from experiments
+├── requirements.txt # List of dependencies for the project
+├── setup_venv.bat   # Script for creating a virtual environment (Windows)
+├── README.md        # Project overview and usage instructions
+```
+
+
+
 
