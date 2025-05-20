@@ -16,12 +16,12 @@ The main contributions include:
 
 ```
 XSTL/
-├── data/            # Preprocessed datasets 
-├── src/             # Core implementation of the XSTL framework
-├── results/         # Saved output metrics from experiments
-├── requirements.txt # List of dependencies for the project
-├── setup_venv.bat   # Script for creating a virtual environment (Windows)
-└── README.md        # Project overview and usage instructions
+    ├── data/            # Preprocessed datasets 
+    ├── src/             # Core implementation of the XSTL framework
+    ├── results/         # Saved output metrics from experiments
+    ├── requirements.txt # List of dependencies for the project
+    ├── setup_venv.bat   # Script for creating a virtual environment (Windows)
+    └── README.md        # Project overview and usage instructions
 ```
 
 ## Getting started
@@ -45,6 +45,14 @@ source venv/bin/activate
 pip install -r requirements.txt
 ```
 
+## Running experiments
 
+Once the virtual environment is activated and the required packages are installed, you can run a full experiment by executing one of the experiment scripts.
+
+For example, to run the main set of XSTL experiments (Table 6 in the paper):
+
+```bash
+python experiments/run_all.py
+```
 
 
