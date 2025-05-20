@@ -145,13 +145,11 @@ def get_advanced_features(df, t_seconds):
                          wnd_goose_pkt_num_of_same_sqNum,
                          wnd_goose_pkt_num_of_greater_than_current_sqNum,
                          wnd_goose_pkt_num_of_same_datSet,
+                         wnd_goose_num_of_all_datSet,
                          wnd_goose_pkt_num_of_same_numDat,
                          wnd_goose_pkt_num_of_same_goID,
-                         wnd_goose_num_of_all_datSet,
                          wnd_goose_num_of_same_source,
                          wnd_goose_num_of_all_source,
-                         wnd_goose_num_of_same_dest,
-                         wnd_goose_num_of_all_dest
                          )), 
                          columns = ['wnd_goose_pkt_num',
                          'wnd_avg_goose_data_length',
@@ -161,13 +159,11 @@ def get_advanced_features(df, t_seconds):
                          'wnd_goose_pkt_num_of_same_sqNum',
                          'wnd_goose_pkt_num_of_greater_than_current_sqNum',
                          'wnd_goose_pkt_num_of_same_datSet',
+                         'wnd_goose_num_of_all_datSet',
                          'wnd_goose_pkt_num_of_same_numDat',
                          'wnd_goose_pkt_num_of_same_goID',
-                         'wnd_goose_num_of_all_datSet',
                          'wnd_goose_num_of_same_source',
                          'wnd_goose_num_of_all_source',
-                         'wnd_goose_num_of_same_dest',
-                         'wnd_goose_num_of_all_dest'
                          ])
 
 def preprocess_df(df, wnd_size):
