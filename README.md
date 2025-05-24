@@ -18,7 +18,7 @@ The main contributions include:
 XSTL/
     ├── data/            # Preprocessed datasets 
     ├── src/             # Core implementation of the XSTL framework
-    ├── results/         # Saved output metrics from experiments
+    ├── results.txt         # Saved output metrics from experiments
     ├── requirements.txt # List of dependencies for the project
     ├── setup_venv.bat   # Script for creating a virtual environment (Windows)
     └── README.md        # Project overview and usage instructions
