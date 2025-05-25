@@ -47,18 +47,40 @@ pip install -r requirements.txt
 
 ## Running experiments
 
-Once the virtual environment is activated and the required packages are installed, you can run a full experiment by executing one of the experiment scripts.
-
-For example, to run all experiments in the paper (Table 6 and Table 7):
+Once the virtual environment is activated and the required packages are installed, you're ready for running experiments. 
 
 ### Windows (recommended)
 
-- To reproduce all results in Table 6 and Table 7 (in the paper), double-click `run_all.bat`. Depending on your hardware, the process may take several hours.
-- To reproduce the result of a specific test, open a command prompt and run:
+To reproduce all results in Table 6 and Table 7 (in the paper), double-click `run_all.bat`. Depending on your hardware, the process may take several hours.
+
+To reproduce the result of a specific test, open a command prompt and run:
 ```bash 
-venv\Scripts\activate.bat
+venv\Scripts\activate.bat # If not already activated
 python -B src/run_experiment.py --test [TEST] 
 ```
-Replace `[TEST]` with one of the test IDs defined in the paper (e.g., `A1`, `B2`, `D3`, etc.).
+Replace `[TEST]` with one of the test IDs defined in the paper (e.g., `A1`, `B2`, `D3`, etc). 
+
+### macOS/Linux
+To reproduce all results in Table 6 and Table 7 (in the paper), open up a terminal and run:
+```bash
+source venv/bin/activate # If not already activated
+python -B src/run_all.py
+```
+Depending on your hardware, this process may take several hours.
+
+To reproduce the result of a specific test, open a command prompt and run:
+```bash
+source venv/bin/activate # If not already activated
+python -B src/run_experiment.py --test [TEST] 
+```
+Replace `[TEST]` with one of the test IDs defined in the paper (e.g., `A1`, `B2`, `D3`, etc). 
+
+## How to interpret the results
+
+
+
+
+
+
 
 
