@@ -49,10 +49,17 @@ pip install -r requirements.txt
 
 Once the virtual environment is activated and the required packages are installed, you can run a full experiment by executing one of the experiment scripts.
 
-For example, to run the main set of XSTL experiments (Table 6 in the paper):
+For example, to run all experiments in the paper (Table 6 and Table 7):
 
-```bash
-python experiments/run_all.py
+### Windows (recommended)
+
+To reproduce all results in Table 6 and Table 7 (in the paper), double-click `run_all.bat`. Depending on your hardware, the process may take several hours.
+
+To reproduce the result of a specific test, open a command prompt and run:
+```bash 
+venv\Scripts\activate.bat
+python -B src/run_experiment.py --test [TEST] 
 ```
+Replace `[TEST]` with one of the test IDs defined in the paper (e.g., `A1`, `B2`, `D3`, etc.).
 
 
