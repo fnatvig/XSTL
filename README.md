@@ -53,9 +53,8 @@ For example, to run all experiments in the paper (Table 6 and Table 7):
 
 ### Windows (recommended)
 
-To reproduce all results in Table 6 and Table 7 (in the paper), double-click `run_all.bat`. Depending on your hardware, the process may take several hours.
-
-To reproduce the result of a specific test, open a command prompt and run:
+- To reproduce all results in Table 6 and Table 7 (in the paper), double-click `run_all.bat`. Depending on your hardware, the process may take several hours.
+- To reproduce the result of a specific test, open a command prompt and run:
 ```bash 
 venv\Scripts\activate.bat
 python -B src/run_experiment.py --test [TEST] 
