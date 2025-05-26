@@ -18,7 +18,4 @@ The only modification made to the original files is the conversion of network tr
 
 ## File Naming Convention
 
-The files in this folder follow the naming used in the main paper:
-- `Daa.xlsx`, `Dab.xlsx`, ..., `Dae.xlsx`
-
-These correspond to network traces during different substation conditions used for training, pretraining, and testing.
+The file names follow the conventions used in the original publications by Biswas et al. and Zemanek et al. They correspond to network traces captured under different substation conditions and are used for pretraining, training, and testing.

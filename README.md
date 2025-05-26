@@ -1,6 +1,6 @@
 # XSTL: Cross-Substation Transfer Learning for Improving Cybersecurity in IEC 61850 Substations
 
-This repository contains code and experiment scripts for the paper:
+This repository contains code for reproducing the results reported in the paper:
 
 **"Exploring Cross-Substation Transfer Learning for Improving Cybersecurity in IEC 61850 Substations"** (Submitted to IEEE Access)
 
@@ -8,10 +8,6 @@ This repository contains code and experiment scripts for the paper:
 
 This project investigates whether knowledge gained from one IEC 61850-based substation can be transferred to improve intrusion detection performance in another substation. The proposed method, called Cross-Substation Transfer Learning (XSTL), is a general framework that can be applied with any detection model. In this specific implementation, we use a simple unsupervised anomaly detector (autoencoder) to demonstrate and evaluate the approach across multiple dataset configurations.
 
-The main contributions include:
-- Pretraining and fine-tuning an IDS on IEC 61850 traffic from different substations
-- Results are evaluated under two operating points: FPR@TPR=1.0 and AUC-ROC.
-- Statistical comparison using the Wilcoxon signed-rank test to account for training variability
 ## Folder structure
 
 ```
@@ -47,36 +43,34 @@ pip install -r requirements.txt
 
 ## Running experiments
 
-Once the virtual environment is activated and the required packages are installed, you're ready for running experiments. 
+Once the virtual environment is generated and the required packages are installed, you're ready for running experiments. 
 
 ### Windows (recommended)
-
-To reproduce all results in Table 6 and Table 7 (in the paper), double-click `run_all.bat`. Depending on your hardware, the process may take several hours.
-
-To reproduce the result of a specific test, open a command prompt and run:
+To reproduce the result of an experiment, open a command prompt and run:
 ```bash 
-venv\Scripts\activate.bat # If not already activated
+venv\Scripts\activate.bat  # If not already activated
 python -B src/run_experiment.py --test [TEST] 
 ```
-Replace `[TEST]` with one of the test IDs defined in the paper (e.g., `A1`, `B2`, `D3`, etc). 
+Replace `[TEST]` with one of the test IDs defined in the paper (e.g., `A1`, `B2`, `D3`, etc). Depending on your hardware, this process may take several hours. 
 
 ### macOS/Linux
-To reproduce all results in Table 6 and Table 7 (in the paper), open up a terminal and run:
+To reproduce the result of an experiment, open a terminal and run:
 ```bash
-source venv/bin/activate # If not already activated
-python -B src/run_all.py
-```
-Depending on your hardware, this process may take several hours.
-
-To reproduce the result of a specific test, open a command prompt and run:
-```bash
-source venv/bin/activate # If not already activated
+source venv/bin/activate  # If not already activated
 python -B src/run_experiment.py --test [TEST] 
 ```
-Replace `[TEST]` with one of the test IDs defined in the paper (e.g., `A1`, `B2`, `D3`, etc). 
+Replace `[TEST]` with one of the test IDs defined in the paper (e.g., `A1`, `B2`, `D3`, etc). Depending on your hardware, this process may take several hours. 
 
 ## How to interpret the results
-
+```bash
+___Results_from_B2_FPR@TPR=1.0___
+B2 FPR = 0.03244705662841683 +- 0.027510336687248692
+B0 FPR = 0.08285287806698387 +- 0.039466704259132714
+B2 p_value (FPR) = 6.57146445422408e-06 (l) - XSTL (B2) is better (STATISTICALLY SIGNIFICANT)
+B2 AUC = 0.9999294402886972 +- 4.10544143732308e-05
+B0 AUC = 0.9997274559964967 +- 0.0005110279168307987
+B2 p_value (AUC) = 1.2983562924223692e-05 (r) - XSTL (B2) is better (STATISTICALLY SIGNIFICANT)
+```
 
 
 

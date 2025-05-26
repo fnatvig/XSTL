@@ -4,8 +4,6 @@ import random
 import os
 import pandas as pd
 import argparse
-
-
 from scipy.stats import wilcoxon
 from sklearn.metrics import roc_auc_score
 
@@ -17,8 +15,6 @@ seed = 42
 random.seed(seed)
 np.random.seed(seed)
 tf.random.set_seed(seed)
-
-# Optional: Force deterministic ops (TensorFlow 2.9+)
 os.environ['TF_DETERMINISTIC_OPS'] = '1'
 
 def parse_test(test):
@@ -118,6 +114,10 @@ def import_data(X_pretrain, X_train):
     df_pretrain = pd.read_excel("data/"+X_pretrain)
     df_train = pd.read_excel("data/"+X_train)
     df_test = pd.read_excel("data/15-attack.xlsx")
+
+    # df_pretrain = df_pretrain.loc[:int(len(df_pretrain)/10)].reset_index(drop=True)
+    # df_train = df_train.loc[:int(len(df_train)/10)].reset_index(drop=True)
+    # df_test = df_test.loc[:int(len(df_test)/100)].reset_index(drop=True)
     return df_pretrain, df_train, df_test 
 
 
@@ -144,6 +144,8 @@ def preprocess_data(df_pretrain, df_train, df_test, wnd_size):
 def test_hypothesis(fpr_a, fpr_b, auc_a, auc_b, test, ablation):
     arr_a = np.array(fpr_a)
     arr_b = np.array(fpr_b)
+
+    # Constructing ID string for baseline (given the ID of test)
     baseline = ""
     freezing = ""
     if ablation:
@@ -160,68 +162,62 @@ def test_hypothesis(fpr_a, fpr_b, auc_a, auc_b, test, ablation):
     else:
         baseline = test[0]+"0"
 
-    if not (arr_a==arr_b).all():
-        alternative = "greater"
-        result1 = wilcoxon(arr_a, arr_b, alternative=alternative, method='approx')
-        alternative = "less"
-        result2 = wilcoxon(arr_a, arr_b, alternative=alternative, method='approx')
-        print("\n")
-        print(f"___Results_from_{test}_FPR@TPR=1.0___")
-        stat_sign = ""
-        if (result1.pvalue<0.05) or (result2.pvalue<0.05):
-            stat_sign = "(STATISTICALLY SIGNIFICANT)"
-        if ablation:
-            print(f"{freezing} FPR = {np.mean(arr_a)} +- {np.std(arr_a)}")
-            print(f"{test} FPR = {np.mean(arr_b)} +- {np.std(arr_b)}")
-        else:
-            print(f"{test} FPR = {np.mean(arr_a)} +- {np.std(arr_a)}")
-            print(f"{baseline} FPR = {np.mean(arr_b)} +- {np.std(arr_b)}")
-        if result2.pvalue<result1.pvalue:
-            if ablation:
-                print(f"p_value = {result2.pvalue} (l) - Freezing ({freezing}) is better {stat_sign}")
-            else:
-                print(f"p_value = {result2.pvalue} (l) - XSTL ({test}) is better {stat_sign}")
-        else:
-            if ablation:
-                print(f"p_value = {result1.pvalue} (r) - Non-freezing ({test}) is better {stat_sign}")
-            else:
-                print(f"p_value = {result1.pvalue} (r) - Baseline ({baseline}) is better {stat_sign}")
+    # Performing wilcoxon signed-rank test (both tails)
+    alternative = "greater"
+    result1 = wilcoxon(arr_a, arr_b, alternative=alternative, method='approx')
+    alternative = "less"
+    result2 = wilcoxon(arr_a, arr_b, alternative=alternative, method='approx')
+    
+    # Writing results to stdout
+    print("\n")
+    print(f"___Results_from_{test}_FPR@TPR=1.0___")
+    stat_sign = ""
+    if (result1.pvalue<0.05) or (result2.pvalue<0.05):
+        stat_sign = "(STATISTICALLY SIGNIFICANT)"
+    if ablation:
+        print(f"{test} FPR = {np.mean(arr_a)} +- {np.std(arr_a)}")
+        print(f"{freezing} FPR = {np.mean(arr_b)} +- {np.std(arr_b)}")
     else:
-        print(f"___Results_from_{test}_FPR@TPR=1.0___")
-        print("No difference in FPR")
+        print(f"{test} FPR = {np.mean(arr_a)} +- {np.std(arr_a)}")
+        print(f"{baseline} FPR = {np.mean(arr_b)} +- {np.std(arr_b)}")
+    if result2.pvalue<result1.pvalue:
+        if ablation:
+            print(f"{test} p_value (FPR) = {result2.pvalue} (l) - Freezing ({freezing}) is better {stat_sign}")
+        else:
+            print(f"{test} p_value (FPR) = {result2.pvalue} (l) - XSTL ({test}) is better {stat_sign}")
+    else:
+        if ablation:
+            print(f"{test} p_value (FPR) = {result1.pvalue} (r) - Non-freezing ({test}) is better {stat_sign}")
+        else:
+            print(f"{test} p_value (FPR) = {result1.pvalue} (r) - Baseline ({baseline}) is better {stat_sign}")
 
+    # Do the same as above but this time for AUC
     arr_a = np.array(auc_a)
     arr_b = np.array(auc_b)
-    if not (arr_a==arr_b).all():
-        alternative = "greater"
-        result1 = wilcoxon(arr_a, arr_b, alternative=alternative, method='approx')
-        alternative = "less"
-        result2 = wilcoxon(arr_a, arr_b, alternative=alternative, method='approx')
-        print("\n")
-        print(f"___Results_from_{test}_AUC-ROC___")
-        stat_sign = ""
-        if (result1.pvalue<0.05) or (result2.pvalue<0.05):
-            stat_sign = "(STATISTICALLY SIGNIFICANT)"
-        if ablation:
-            print(f"{freezing} AUC = {np.mean(arr_a)} +- {np.std(arr_a)}")
-            print(f"{test} AUC = {np.mean(arr_b)} +- {np.std(arr_b)}")
-        else:
-            print(f"{test} AUC = {np.mean(arr_a)} +- {np.std(arr_a)}")
-            print(f"{baseline} AUC = {np.mean(arr_b)} +- {np.std(arr_b)}")
-        if result2.pvalue<result1.pvalue:
-            if ablation:
-                print(f"{test} p_value = {result2.pvalue} (l) - Non-freezing ({test}) is better {stat_sign}")
-            else:
-                print(f"{test} p_value = {result2.pvalue} (l) - Baseline ({baseline}) is better {stat_sign}")
-        else:
-            if ablation:
-                print(f"{test} p_value = {result1.pvalue} (r) - Freezing ({freezing}) is better {stat_sign}")
-            else:
-                print(f"{test} p_value = {result1.pvalue} (r) - XSTL ({test}) is better {stat_sign}")
-        print("\n")
+    alternative = "greater"
+    result1 = wilcoxon(arr_a, arr_b, alternative=alternative, method='approx')
+    alternative = "less"
+    result2 = wilcoxon(arr_a, arr_b, alternative=alternative, method='approx')
+    stat_sign = ""
+    if (result1.pvalue<0.05) or (result2.pvalue<0.05):
+        stat_sign = "(STATISTICALLY SIGNIFICANT)"
+    if ablation:
+        print(f"{test} AUC = {np.mean(arr_a)} +- {np.std(arr_a)}")
+        print(f"{freezing} AUC = {np.mean(arr_b)} +- {np.std(arr_b)}")
     else:
-        print(f"___Results_from_{test}_AUC-ROC___")
-        print("No difference in AUC-ROC")
+        print(f"{test} AUC = {np.mean(arr_a)} +- {np.std(arr_a)}")
+        print(f"{baseline} AUC = {np.mean(arr_b)} +- {np.std(arr_b)}")
+    if result2.pvalue<result1.pvalue:
+        if ablation:
+            print(f"{test} p_value (AUC) = {result2.pvalue} (l) - Non-freezing ({test}) is better {stat_sign}")
+        else:
+            print(f"{test} p_value (AUC) = {result2.pvalue} (l) - Baseline ({baseline}) is better {stat_sign}")
+    else:
+        if ablation:
+            print(f"{test} p_value (AUC) = {result1.pvalue} (r) - Freezing ({freezing}) is better {stat_sign}")
+        else:
+            print(f"{test} p_value (AUC) = {result1.pvalue} (r) - XSTL ({test}) is better {stat_sign}")
+
 
 def main(args):
     print(f"Running Test: {args.test}")
@@ -240,11 +236,12 @@ def main(args):
     for i in range(30):
         print(f"\rRound: {i}/30", end='', flush=True)
         
-
+        # Training model A
         model_a = train(data=df_pretrain, epochs=1000, patience=3, lr= 0.001)
         model_a = retrain(data=df_train, model=model_a, epochs=1000, patience=5, trainable_encoder=False, lr= 0.003)
         model_a = retrain(data=df_train, model=model_a, epochs=1000, patience=3, trainable_encoder=True, lr= 0.0003)
         
+        # Training model B
         model_b = None
         if ablation:
             model_b = train(data=df_pretrain, epochs=1000, patience=3, lr=0.001)
@@ -253,17 +250,16 @@ def main(args):
             model_b = train(data=df_train, epochs=1000, patience=5, lr= 0.003)
         model_b = retrain(data=df_train, model=model_b, epochs=1000, patience=3, trainable_encoder=True, lr= 0.0003)
 
+        # Evaluate model A and model B
         fpr_a, fpr_b, auc_a, auc_b = detect(df_test, df_test_raw, model_a=model_a, model_b=model_b, tpr_target=[1.0])
+        
+        # Save results
         fpr_A.append(fpr_a)
         fpr_B.append(fpr_b)
         auc_A.append(auc_a)
         auc_B.append(auc_b)
-            
-        print(f"fpr_p = {fpr_a}")
-        print(f"fpr_t = {fpr_b}")
-        print(f"auc_p = {auc_a}")
-        print(f"auc_t = {auc_b}")
     
+    # Statistical evaluation and comparison
     test_hypothesis(fpr_A, fpr_B, auc_A, auc_B, args.test, ablation)
 
 
