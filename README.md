@@ -12,9 +12,8 @@ This project investigates whether knowledge gained from one IEC 61850-based subs
 
 ```
 XSTL/
-    ├── data/               # Preprocessed datasets 
+    ├── data/               # Datasets 
     ├── src/                # Source code for XSTL implementation
-    ├── results.txt         # Saved output metrics from experiments
     ├── requirements.txt    # List of dependencies for the project
     ├── setup_venv.bat      # Script for creating a virtual environment (Windows)
     └── README.md           # Project overview and usage instructions
@@ -62,24 +61,25 @@ python -B src/run_experiment.py --test [TEST]
 Replace `[TEST]` with one of the test IDs defined in the paper (e.g., `A1`, `B2`, `D3`, etc). Depending on your hardware, this process may take a few hours. 
 
 ## How to interpret the results
+To reproduce any of the results reported in Table 6, run one of the following tests: `A1`-`A3`, `B1`-`B3`, `C1`-`C3` or `D1`-`D3`. The text below reveals the output from running test `A1`. The first 
 ```bash
-___Results_from_A1_FPR@TPR=1.0___
-A1 FPR = 0.0329321765090027 +- 0.02521485260047171
-A0 FPR = 0.05395092825823305 +- 0.012494693195758974
-A1 p_value (FPR) = 0.0006586774211924253 (l) - XSTL (A1) is better (STATISTICALLY SIGNIFICANT)
-A1 AUC = 0.9999085333913132 +- 6.583640955529369e-05
-A0 AUC = 0.9998750624711353 +- 4.2074750687536923e-05
-A1 p_value (AUC) = 0.0376066561077384 (r) - XSTL (A1) is better (STATISTICALLY SIGNIFICANT)
+___Results_from_A1___
+A1 (FPR@TPR=1) FPR = 0.0329321765090027 +- 0.02521485260047171
+A0 (FPR@TPR=1) FPR = 0.05395092825823305 +- 0.012494693195758974
+A1 (FPR@TPR=1) p_value = 0.0006586774211924253 (l) - XSTL (A1) is better (STATISTICALLY SIGNIFICANT)
+A1 (AUC-ROC) AUC = 0.9999085333913132 +- 6.583640955529369e-05
+A0 (AUC-ROC) AUC = 0.9998750624711353 +- 4.2074750687536923e-05
+A1 (AUC-ROC) p_value = 0.0376066561077384 (r) - XSTL (A1) is better (STATISTICALLY SIGNIFICANT)
 ```
 
 ```bash
-___Results_from_E1_FPR@TPR=1.0___
-A1 FPR = 0.0329321765090027 +- 0.02521485260047171
-E1 FPR = 0.043996641477749794 +- 0.022888771065752732
-E1 p_value (FPR) = 0.05659532941705212 (l) - Freezing (A1) is better
-A1 AUC = 0.9999085333913132 +- 6.583640955529369e-05
-E1 AUC = 0.9999052780495591 +- 5.7444726019119126e-05
-E1 p_value (AUC) = 0.35944378106813346 (r) - Freezing (A1) is better
+___Results_from_E1___
+A1 (FPR@TPR=1) FPR = 0.0329321765090027 +- 0.02521485260047171
+E1 (FPR@TPR=1) FPR = 0.043996641477749794 +- 0.022888771065752732
+E1 (FPR@TPR=1) p_value = 0.05659532941705212 (l) - Freezing (A1) is better
+A1 (AUC-ROC) AUC = 0.9999085333913132 +- 6.583640955529369e-05
+E1 (AUC-ROC) AUC = 0.9999052780495591 +- 5.7444726019119126e-05
+E1 (AUC-ROC) p_value = 0.35944378106813346 (r) - Freezing (A1) is better
 ```
 
 
