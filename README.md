@@ -59,20 +59,28 @@ To reproduce the result of an experiment, open a terminal and run:
 source venv/bin/activate  # If not already activated
 python -B src/run_experiment.py --test [TEST] 
 ```
-Replace `[TEST]` with one of the test IDs defined in the paper (e.g., `A1`, `B2`, `D3`, etc). Depending on your hardware, this process may take several hours. 
+Replace `[TEST]` with one of the test IDs defined in the paper (e.g., `A1`, `B2`, `D3`, etc). Depending on your hardware, this process may take a few hours. 
 
 ## How to interpret the results
 ```bash
-___Results_from_B2_FPR@TPR=1.0___
-B2 FPR = 0.03244705662841683 +- 0.027510336687248692
-B0 FPR = 0.08285287806698387 +- 0.039466704259132714
-B2 p_value (FPR) = 6.57146445422408e-06 (l) - XSTL (B2) is better (STATISTICALLY SIGNIFICANT)
-B2 AUC = 0.9999294402886972 +- 4.10544143732308e-05
-B0 AUC = 0.9997274559964967 +- 0.0005110279168307987
-B2 p_value (AUC) = 1.2983562924223692e-05 (r) - XSTL (B2) is better (STATISTICALLY SIGNIFICANT)
+___Results_from_A1_FPR@TPR=1.0___
+A1 FPR = 0.0329321765090027 +- 0.02521485260047171
+A0 FPR = 0.05395092825823305 +- 0.012494693195758974
+A1 p_value (FPR) = 0.0006586774211924253 (l) - XSTL (A1) is better (STATISTICALLY SIGNIFICANT)
+A1 AUC = 0.9999085333913132 +- 6.583640955529369e-05
+A0 AUC = 0.9998750624711353 +- 4.2074750687536923e-05
+A1 p_value (AUC) = 0.0376066561077384 (r) - XSTL (A1) is better (STATISTICALLY SIGNIFICANT)
 ```
 
-
+```bash
+___Results_from_E1_FPR@TPR=1.0___
+E1 FPR = 0.0329321765090027 +- 0.02521485260047171
+A1 FPR = 0.043996641477749794 +- 0.022888771065752732
+E1 p_value (FPR) = 0.05659532941705212 (l) - Freezing (A1) is better
+E1 AUC = 0.9999085333913132 +- 6.583640955529369e-05
+A1 AUC = 0.9999052780495591 +- 5.7444726019119126e-05
+E1 p_value (AUC) = 0.35944378106813346 (r) - Freezing (A1) is better
+```
 
 
 
