@@ -61,7 +61,7 @@ python -B src/run_experiment.py --test [TEST]
 Replace `[TEST]` with one of the test IDs defined in the paper (e.g., `A1`, `B2`, `D3`, etc). Depending on your hardware, this process may take a few hours. 
 
 ## How to interpret the results
-To reproduce any of the results reported in **Table 6**, run one of the following tests: `A1`-`A3`, `B1`-`B3`, `C1`-`C3` or `D1`-`D3`. The text below shows the output from running test `A1`. By default, the results from the baseline model (`A0` in the example below) is shown alongside the XSTL results. In other words, the output below show every entry in the first two rows of **Table 6**. 
+To reproduce any of the results reported in **Table 6**, run one of the following tests: `A1`-`A3`, `B1`-`B3`, `C1`-`C3` or `D1`-`D3`. The text below shows the output from running test `A1`. By default, the results from the baseline model (`A0` for `A1`) is shown alongside the XSTL results. In other words, the output below show every entry in the first two rows of **Table 6**. 
 ```bash
 ___Results_from_A1___
 A1 (FPR@TPR=1) FPR = 0.0329321765090027 +- 0.02521485260047171
