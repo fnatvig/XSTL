@@ -175,8 +175,8 @@ def test_hypothesis(fpr_a, fpr_b, auc_a, auc_b, test, ablation):
     if (result1.pvalue<0.05) or (result2.pvalue<0.05):
         stat_sign = "(STATISTICALLY SIGNIFICANT)"
     if ablation:
-        print(f"{test} FPR = {np.mean(arr_a)} +- {np.std(arr_a)}")
-        print(f"{freezing} FPR = {np.mean(arr_b)} +- {np.std(arr_b)}")
+        print(f"{freezing} FPR = {np.mean(arr_a)} +- {np.std(arr_a)}")
+        print(f"{test} FPR = {np.mean(arr_b)} +- {np.std(arr_b)}")
     else:
         print(f"{test} FPR = {np.mean(arr_a)} +- {np.std(arr_a)}")
         print(f"{baseline} FPR = {np.mean(arr_b)} +- {np.std(arr_b)}")
@@ -202,8 +202,8 @@ def test_hypothesis(fpr_a, fpr_b, auc_a, auc_b, test, ablation):
     if (result1.pvalue<0.05) or (result2.pvalue<0.05):
         stat_sign = "(STATISTICALLY SIGNIFICANT)"
     if ablation:
-        print(f"{test} AUC = {np.mean(arr_a)} +- {np.std(arr_a)}")
-        print(f"{freezing} AUC = {np.mean(arr_b)} +- {np.std(arr_b)}")
+        print(f"{freezing} AUC = {np.mean(arr_a)} +- {np.std(arr_a)}")
+        print(f"{test} AUC = {np.mean(arr_b)} +- {np.std(arr_b)}")
     else:
         print(f"{test} AUC = {np.mean(arr_a)} +- {np.std(arr_a)}")
         print(f"{baseline} AUC = {np.mean(arr_b)} +- {np.std(arr_b)}")
