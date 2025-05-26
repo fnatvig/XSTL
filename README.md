@@ -14,8 +14,8 @@ This project investigates whether knowledge gained from one IEC 61850-based subs
 XSTL/
     ├── data/               # Datasets 
     ├── src/                # Source code for XSTL implementation
-    ├── requirements.txt    # List of dependencies for the project
-    ├── setup_venv.bat      # Script for creating a virtual environment (Windows)
+    ├── requirements.txt    # Project dependencies
+    ├── setup_venv.bat      # Virtual environment setup script (Windows)
     └── README.md           # Project overview and usage instructions
 ```
 
@@ -34,25 +34,27 @@ Double-click the file `setup_venv.bat` to:
 
 ### macOS/Linux (manual setup)
 
-If you're not on Windows, run the following from the command line:
+On non-Windows systems, run:
 
 ```bash
-python3 -m venv venv
+sudo apt install python3.10 python3.10-venv python3.10-dev
+python3.10 -m venv venv
 source venv/bin/activate
+pip install --upgrade pip
 pip install -r requirements.txt
 ```
 
 ## Running experiments
 
-Once the virtual environment is generated and the required packages are installed, you're ready for running experiments. 
+Once the virtual environment is set up, you're ready to run experiments.
 
 ### Windows (recommended)
 To reproduce the result of an experiment, open a command prompt and run:
 ```bash 
-venv\Scripts\activate.bat  # If not already activated
+.\venv\Scripts\activate  # If not already activated
 python -B src/run_experiment.py --test [TEST] 
 ```
-Replace `[TEST]` with one of the test IDs defined in the paper (e.g., `A1`, `B2`, `D3`, etc). Depending on your hardware, this process may take several hours. 
+Replace `[TEST]` with one of the test IDs defined in the paper (e.g., `A1`, `B2`, `D3`, etc). Depending on your hardware, this process may take a few hours. 
 
 ### macOS/Linux
 To reproduce the result of an experiment, open a terminal and run:
@@ -63,7 +65,7 @@ python -B src/run_experiment.py --test [TEST]
 Replace `[TEST]` with one of the test IDs defined in the paper (e.g., `A1`, `B2`, `D3`, etc). Depending on your hardware, this process may take a few hours. 
 
 ## How to interpret the results
-To reproduce any of the results reported in **Table 6**, run one of the following tests: `A1`-`A3`, `B1`-`B3`, `C1`-`C3` or `D1`-`D3`. The text below shows the output from running test `A1`. By default, the results from the baseline model (`A0` for `A1`) is shown alongside the XSTL results. In other words, the output below show every entry in the first two rows of **Table 6**. 
+To reproduce any of the results reported in **Table 6**, run one of the following tests: `A1`-`A3`, `B1`-`B3`, `C1`-`C3` or `D1`-`D3`. The following output example shows the result of running test `A1`. The baseline model (`A0`) is shown alongside the XSTL result (`A1`), covering the first two rows of **Table 6**. 
 ```bash
 ___Results_from_A1___
 A1 (FPR@TPR=1) FPR = 0.0329321765090027 +- 0.02521485260047171
@@ -74,7 +76,7 @@ A0 (AUC-ROC) AUC = 0.9998750624711353 +- 4.2074750687536923e-05
 A1 (AUC-ROC) p_value = 0.0376066561077384 (r) - XSTL (A1) is better (STATISTICALLY SIGNIFICANT)
 ```
 
-To reproduce any of the results reported in **Table 7**, run one of the following tests: `E1`-`E3`, `F1`-`F3`, `G1`-`G3` or `H1`-`H3`. The text below shows the output from running test `E1`. By default, the test's freezing counterpart (`A1` for `E1`) is shown alongside the result of the current test. In other words, the output below show every entry in the first two rows of **Table 7**. 
+To reproduce any of the results reported in **Table 7**, run one of the following tests: `E1`-`E3`, `F1`-`F3`, `G1`-`G3` or `H1`-`H3`. The text below shows the output from running test `E1`. Below is an example output from test (`E1`), where the corresponding "frozen" model (`A1`) is shown for comparison. These correspond to the first two rows of **Table 7**. 
 ```bash
 ___Results_from_E1___
 A1 (FPR@TPR=1) FPR = 0.0329321765090027 +- 0.02521485260047171
