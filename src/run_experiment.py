@@ -170,26 +170,26 @@ def test_hypothesis(fpr_a, fpr_b, auc_a, auc_b, test, ablation):
     
     # Writing results to stdout
     print("\n")
-    print(f"___Results_from_{test}_FPR@TPR=1.0___")
+    print(f"___Results_from_{test}___")
     stat_sign = ""
     if (result1.pvalue<0.05) or (result2.pvalue<0.05):
         stat_sign = "(STATISTICALLY SIGNIFICANT)"
     if ablation:
-        print(f"{freezing} FPR = {np.mean(arr_a)} +- {np.std(arr_a)}")
-        print(f"{test} FPR = {np.mean(arr_b)} +- {np.std(arr_b)}")
+        print(f"{freezing} (FPR@TPR=1) FPR = {np.mean(arr_a)} +- {np.std(arr_a)}")
+        print(f"{test} (FPR@TPR=1) FPR = {np.mean(arr_b)} +- {np.std(arr_b)}")
     else:
-        print(f"{test} FPR = {np.mean(arr_a)} +- {np.std(arr_a)}")
-        print(f"{baseline} FPR = {np.mean(arr_b)} +- {np.std(arr_b)}")
+        print(f"{test} (FPR@TPR=1) FPR = {np.mean(arr_a)} +- {np.std(arr_a)}")
+        print(f"{baseline} (FPR@TPR=1) FPR = {np.mean(arr_b)} +- {np.std(arr_b)}")
     if result2.pvalue<result1.pvalue:
         if ablation:
-            print(f"{test} p_value (FPR) = {result2.pvalue} (l) - Freezing ({freezing}) is better {stat_sign}")
+            print(f"{test} (FPR@TPR=1) p_value = {result2.pvalue} (l) - Freezing ({freezing}) is better {stat_sign}")
         else:
-            print(f"{test} p_value (FPR) = {result2.pvalue} (l) - XSTL ({test}) is better {stat_sign}")
+            print(f"{test} (FPR@TPR=1) p_value = {result2.pvalue} (l) - XSTL ({test}) is better {stat_sign}")
     else:
         if ablation:
-            print(f"{test} p_value (FPR) = {result1.pvalue} (r) - Non-freezing ({test}) is better {stat_sign}")
+            print(f"{test} (FPR@TPR=1) p_value = {result1.pvalue} (r) - Non-freezing ({test}) is better {stat_sign}")
         else:
-            print(f"{test} p_value (FPR) = {result1.pvalue} (r) - Baseline ({baseline}) is better {stat_sign}")
+            print(f"{test} (FPR@TPR=1) p_value = {result1.pvalue} (r) - Baseline ({baseline}) is better {stat_sign}")
 
     # Do the same as above but this time for AUC
     arr_a = np.array(auc_a)
@@ -202,21 +202,21 @@ def test_hypothesis(fpr_a, fpr_b, auc_a, auc_b, test, ablation):
     if (result1.pvalue<0.05) or (result2.pvalue<0.05):
         stat_sign = "(STATISTICALLY SIGNIFICANT)"
     if ablation:
-        print(f"{freezing} AUC = {np.mean(arr_a)} +- {np.std(arr_a)}")
-        print(f"{test} AUC = {np.mean(arr_b)} +- {np.std(arr_b)}")
+        print(f"{freezing} (AUC-ROC) AUC = {np.mean(arr_a)} +- {np.std(arr_a)}")
+        print(f"{test} (AUC-ROC) AUC = {np.mean(arr_b)} +- {np.std(arr_b)}")
     else:
-        print(f"{test} AUC = {np.mean(arr_a)} +- {np.std(arr_a)}")
-        print(f"{baseline} AUC = {np.mean(arr_b)} +- {np.std(arr_b)}")
+        print(f"{test} (AUC-ROC) AUC = {np.mean(arr_a)} +- {np.std(arr_a)}")
+        print(f"{baseline} (AUC-ROC) AUC = {np.mean(arr_b)} +- {np.std(arr_b)}")
     if result2.pvalue<result1.pvalue:
         if ablation:
-            print(f"{test} p_value (AUC) = {result2.pvalue} (l) - Non-freezing ({test}) is better {stat_sign}")
+            print(f"{test} (AUC-ROC) p_value = {result2.pvalue} (l) - Non-freezing ({test}) is better {stat_sign}")
         else:
-            print(f"{test} p_value (AUC) = {result2.pvalue} (l) - Baseline ({baseline}) is better {stat_sign}")
+            print(f"{test} (AUC-ROC) p_value = {result2.pvalue} (l) - Baseline ({baseline}) is better {stat_sign}")
     else:
         if ablation:
-            print(f"{test} p_value (AUC) = {result1.pvalue} (r) - Freezing ({freezing}) is better {stat_sign}")
+            print(f"{test} (AUC-ROC) p_value = {result1.pvalue} (r) - Freezing ({freezing}) is better {stat_sign}")
         else:
-            print(f"{test} p_value (AUC) = {result1.pvalue} (r) - XSTL ({test}) is better {stat_sign}")
+            print(f"{test} (AUC-ROC) p_value = {result1.pvalue} (r) - XSTL ({test}) is better {stat_sign}")
 
 
 def main(args):
