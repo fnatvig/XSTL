@@ -1,3 +1,6 @@
+import os
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
+
 import tensorflow as tf
 import numpy as np
 import random
@@ -233,7 +236,7 @@ def main(args):
     auc_B = []
     fpr_A = []
     fpr_B = []
-    for i in range(30):
+    for i in range(1,31):
         print(f"\rRound: {i}/30", end='', flush=True)
         
         # Training model A

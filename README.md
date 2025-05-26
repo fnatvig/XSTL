@@ -21,7 +21,9 @@ XSTL/
 
 ## Getting started
 
-It is recommended to use a virtual environment before running any experiments.
+It is recommended to use a virtual environment before running any experiments. 
+
+**Note:** The experiments were conducted on Windows 11 using Python 3.10.11. While the code is cross-platform and produces consistent results across environments, exact numerical reproduction of the reported results is most reliable on Windows.
 
 ### Windows (recommended)
 
