@@ -2,7 +2,7 @@
 
 This repository contains code for reproducing the results reported in the paper:
 
-**"Exploring Cross-Substation Transfer Learning for Improving Cybersecurity in IEC 61850 Substations"** (Submitted to IEEE Access)
+Natvig, F., Nordström, L., & Ericsson, G. N. (2025). Exploring Cross-Substation Transfer Learning for Improving Cybersecurity in IEC 61850 Substations. *IEEE Access.*
 
 ## Overview
 
